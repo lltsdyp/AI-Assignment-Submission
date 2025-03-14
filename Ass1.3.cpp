@@ -30,7 +30,8 @@ int main(){
     {
         int u,v,cost;
         cin>>u>>v>>cost;
-        graph[u][v]=cost;
+        if(graph[u][v]==0 || cost<graph[u][v])
+            graph[u][v]=cost;
     }
     while(!q.empty())
     {
