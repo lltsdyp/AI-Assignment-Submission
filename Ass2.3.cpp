@@ -4,14 +4,16 @@
 #include <string>
 #include <algorithm>
 #include <unordered_map>
+#include <unordered_set>
 #include <utility>
+#include <deque>
 using namespace std;
 
 using status = std::tuple<long long, int, string>;
 const long long dx[] = {-1, 0, 0, 1}, dy[] = {0, -1, 1, 0};
 const char action[]={'u','l','r','d'};
 long long pow10[] = {1, 10, 100, 1000, 10000, 100000, 1000000, 10000000, 100000000, 1000000000};
-const long long target = 123456780;
+const long long target = 123456780ll;
 
 
 // 小顶堆构造
@@ -55,6 +57,7 @@ int cost(long long loc)
 int main()
 {
     long long n = 0;
+    deque<int> check;
     // 最先输入的是最高位，故倒序
     for (int i = 8; i >= 0; --i)
     {
@@ -64,16 +67,34 @@ int main()
         if (c == 'x')
         {
             n += pow10[i] * 0;
+            check.push_back(0);
         }
         else
         {
             n += pow10[i] * (c - '0');
+            check.push_back(c - '0');
         }
+    }
+    int inv_count = 0;
+    for (int i = 0;i < 8;i++) {
+        for (int j = i + 1;j < 9;j++) {
+            if (check[j] == 0) continue;
+            if (check[j] < check[i]) {
+                inv_count++;
+            }
+        }
+    }
+    if(inv_count%2)
+    {
+        cout<<"unsolvable"<<endl;
+        return 0;
     }
     priority_queue<status,vector<status>,cmp> pq;
     pq.push({n, cost(n),""});
-    unordered_map<long long,string> vis;
-    string result = "unsolvable";
+    // unordered_map<long long,string> vis;
+    unordered_set<long long> vis;
+    string result = "";
+    int checked=0;
 
     while (!pq.empty())
     {
@@ -85,7 +106,8 @@ int main()
         // 查重
         if (vis.count(get<0>(cur)))
             continue;
-        vis[get<0>(cur)]=get<2>(cur);
+        // vis[get<0>(cur)]=get<2>(cur);
+        vis.insert(get<0>(cur));
 
         if (get<0>(cur) == target)
         {

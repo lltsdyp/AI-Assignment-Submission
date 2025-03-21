@@ -1,11 +1,11 @@
 #include <iostream>
 #include <queue>
+#include <array>
+#include <vector>
 
 using namespace std;
 
 constexpr int N=1e5+19;
-int graph[N][N];
-int vis[N];
 
 class status{
 public:
@@ -20,6 +20,8 @@ int main(){
     queue<status> q;
     q.push({1,0});
     cin>>n>>m;
+    vector<vector<int>> graph(n+1,vector<int>(n+1,0));
+    vector<int> visited(n+1,0);
     for(int _=0;_<m;++_)
     {
         int u,v;
@@ -30,9 +32,9 @@ int main(){
     {
         status cur=q.front();
         q.pop();
-        if(vis[cur.pos])
+        if(visited[cur.pos])
             continue;
-        vis[cur.pos]=1;
+        visited[cur.pos]=1;
         if(cur.pos==n)
         {
             cout<<cur.dist<<'\n';

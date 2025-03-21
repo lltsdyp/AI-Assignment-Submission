@@ -1,12 +1,13 @@
 #include <iostream>
 #include <queue>
 #include <list>
+#include <climits>
 
 using namespace std;
 
 constexpr int N=9999;
-int graph[N][N];
-int vis[N];
+// int graph[N][N];
+// int vis[N];
 
 class status{
 public:
@@ -52,19 +53,22 @@ int main(){
     pq_no_heap q;
     q.push({1,0});
     cin>>n>>m;
+    vector<vector<int>> graph(n+1,vector<int>(n+1,0));
+    vector<int> vis(n+1,INT_MAX);
     for(int _=0;_<m;++_)
     {
         int u,v,cost;
         cin>>u>>v>>cost;
-        graph[u][v]=cost;
+        if(graph[u][v]==0 || cost<graph[u][v])
+            graph[u][v]=cost;
     }
     while(!q.empty())
     {
         status cur=q.front();
         q.pop();
-        if(vis[cur.pos])
+        if(cur.dist>vis[cur.pos])
             continue;
-        vis[cur.pos]=1;
+        vis[cur.pos]=cur.dist;
         if(cur.pos==n)
         {
             cout<<cur.dist<<'\n';
