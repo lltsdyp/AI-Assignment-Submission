@@ -1,6 +1,5 @@
 #include <iostream>
 #include <queue>
-#include <array>
 #include <vector>
 
 using namespace std;

@@ -1,0 +1,25 @@
+{
+    "files.associations": {
+        "*.y": "bison",
+        "*.l": "cpp",
+        "*.lex": "cpp",
+        "*.grm": "bison",
+        "*.yy": "bison",
+        "deque": "cpp",
+        "list": "cpp",
+        "queue": "cpp",
+        "vector": "cpp",
+        "xstring": "cpp",
+        "xutility": "cpp",
+        "utility": "cpp",
+        "map": "cpp",
+        "xhash": "cpp",
+        "xtree": "cpp",
+        "ostream": "cpp",
+        "exception": "cpp",
+        "array": "cpp",
+        "iostream": "cpp",
+        "set": "cpp",
+        "new": "cpp"
+    }
+}
