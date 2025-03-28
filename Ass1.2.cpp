@@ -33,14 +33,16 @@ int main() {
   for (int i = 1; i <= n; ++i) {
     int minNode = -1;
     for (int j = 1; j <= n; ++j) {
-      if (!vis[i] && (minNode == -1 || dis[i] < dis[minNode]))
-        minNode = i;
+      if (!vis[j] && (minNode == -1 || dis[j] < dis[minNode]))
+        minNode = j;
     }
     vis[minNode] = 1;
     for (int j = 1; j <= n; ++j) {
+      if(graph[minNode][j]!=20000){
       int newDis = dis[minNode] + graph[minNode][j];
       if (newDis < dis[j])
         dis[j] = newDis;
+    }
     }
   }
   cout << (dis[n] == INT_MAX >> 1 ? -1 : dis[n]) << '\n';
