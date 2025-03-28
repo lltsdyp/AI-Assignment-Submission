@@ -20,7 +20,7 @@ int main() {
 
   for (int i = 1; i <= n; ++i) {
     for (int j = 1; j <= n; ++j) {
-      graph[i][j] = INT_MAX >> 1;
+      graph[i][j] = 20000;
     }
   }
 
